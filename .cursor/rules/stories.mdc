@@ -1,0 +1,7 @@
+---
+alwaysApply: true
+---
+Whenever we add a new component to our project, create a matching Storybook story file for it.
+Use context7 to guide how the story should be written so it follows Storybook best practices.
+Use designsystemsMCP to make sure the story includes the right design system variants, props, and accessibility notes.
+The story should include clear usage examples, default args, and any important documentation.
