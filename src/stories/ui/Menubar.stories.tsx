@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem } from '@/components/ui/menubar'
 
 const meta: Meta<typeof Menubar> = {
-  title: 'UI/Menubar',
+  title: 'Design Tokens/Menubar',
   component: Menubar,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 
 const meta: Meta<typeof ToggleGroup> = {
-  title: 'UI/ToggleGroup',
+  title: 'Design Tokens/ToggleGroup',
   component: ToggleGroup,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

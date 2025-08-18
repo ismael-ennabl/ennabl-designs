@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from '@/components/ui/navigation-menu'
 
 const meta: Meta<typeof NavigationMenu> = {
-  title: 'UI/NavigationMenu',
+  title: 'Design Tokens/NavigationMenu',
   component: NavigationMenu,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

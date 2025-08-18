@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from '@/components/ui/input-otp'
 
 const meta: Meta<typeof InputOTP> = {
-  title: 'UI/InputOtp',
+  title: 'Design Tokens/InputOtp',
   component: InputOTP,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

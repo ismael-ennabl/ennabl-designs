@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable'
 
 const meta: Meta<typeof ResizablePanelGroup> = {
-  title: 'UI/Resizable',
+  title: 'Design Tokens/Resizable',
   component: ResizablePanelGroup,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

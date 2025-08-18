@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbSeparator, BreadcrumbLink, BreadcrumbPage } from '@/components/ui/breadcrumb'
 
 const meta: Meta<typeof Breadcrumb> = {
-  title: 'UI/Breadcrumb',
+  title: 'Design Tokens/Breadcrumb',
   component: Breadcrumb,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

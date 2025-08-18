@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table'
 
 const meta: Meta<typeof Table> = {
-  title: 'UI/Table',
+  title: 'Design Tokens/Table',
   component: Table,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

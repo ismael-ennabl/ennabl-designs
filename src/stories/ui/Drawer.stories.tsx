@@ -3,7 +3,7 @@ import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, Drawer
 import { Button } from '@/components/ui/button'
 
 const meta: Meta<typeof Drawer> = {
-  title: 'UI/Drawer',
+  title: 'Design Tokens/Drawer',
   component: Drawer,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 
 const meta: Meta<typeof Alert> = {
-  title: 'UI/Alert',
+  title: 'Design Tokens/Alert',
   component: Alert,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

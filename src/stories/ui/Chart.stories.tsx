@@ -3,7 +3,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLe
 import { LineChart, Line, XAxis, YAxis } from 'recharts'
 
 const meta: Meta<typeof ChartContainer> = {
-  title: 'UI/Chart',
+  title: 'Design Tokens/Chart',
   component: ChartContainer,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationPrevious, PaginationNext, PaginationEllipsis } from '@/components/ui/pagination'
 
 const meta: Meta<typeof Pagination> = {
-  title: 'UI/Pagination',
+  title: 'Design Tokens/Pagination',
   component: Pagination,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

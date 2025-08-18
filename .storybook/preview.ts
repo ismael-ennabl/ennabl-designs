@@ -1,3 +1,12 @@
 // Re-export from the TSX file so SWC doesn't parse JSX in .ts.
 export { default } from './preview.tsx'
 export { decorators, globalTypes } from './preview.tsx'
+
+export const parameters = {
+  a11y: {
+    // 'todo' - show a11y violations in the test UI only
+    // 'error' - fail CI on a11y violations
+    // 'off' - skip a11y checks entirely
+    test: 'todo'
+  }
+};

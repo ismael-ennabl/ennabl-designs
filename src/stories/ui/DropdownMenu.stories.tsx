@@ -3,7 +3,7 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import { Button } from '@/components/ui/button'
 
 const meta: Meta<typeof DropdownMenu> = {
-  title: 'UI/DropdownMenu',
+  title: 'Design Tokens/DropdownMenu',
   component: DropdownMenu,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

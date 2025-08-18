@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator } from '@/components/ui/context-menu'
 
 const meta: Meta<typeof ContextMenu> = {
-  title: 'UI/ContextMenu',
+  title: 'Design Tokens/ContextMenu',
   component: ContextMenu,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 
 const meta: Meta<typeof Carousel> = {
-  title: 'UI/Carousel',
+  title: 'Design Tokens/Carousel',
   component: Carousel,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

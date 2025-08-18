@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 
 const meta: Meta<typeof Tabs> = {
-  title: 'UI/Tabs',
+  title: 'Design Tokens/Tabs',
   component: Tabs,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

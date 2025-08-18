@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { HoverCard, HoverCardTrigger, HoverCardContent } from '@/components/ui/hover-card'
 
 const meta: Meta<typeof HoverCard> = {
-  title: 'UI/HoverCard',
+  title: 'Design Tokens/HoverCard',
   component: HoverCard,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

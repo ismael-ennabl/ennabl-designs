@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { CommandDialog, CommandInput, CommandList, CommandGroup, CommandItem, CommandEmpty } from '@/components/ui/command'
 
 const meta: Meta<typeof CommandDialog> = {
-  title: 'UI/Command',
+  title: 'Design Tokens/Command',
   component: CommandDialog,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

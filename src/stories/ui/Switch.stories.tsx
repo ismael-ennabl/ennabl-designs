@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Switch } from '@/components/ui/switch'
 
 const meta: Meta<typeof Switch> = {
-  title: 'UI/Switch',
+  title: 'Design Tokens/Switch',
   component: Switch,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

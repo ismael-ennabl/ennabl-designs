@@ -3,7 +3,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, Dialog
 import { Button } from '@/components/ui/button'
 
 const meta: Meta<typeof Dialog> = {
-  title: 'UI/Dialog',
+  title: 'Design Tokens/Dialog',
   component: Dialog,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

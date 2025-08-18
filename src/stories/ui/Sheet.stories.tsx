@@ -3,7 +3,7 @@ import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescri
 import { Button } from '@/components/ui/button'
 
 const meta: Meta<typeof Sheet> = {
-  title: 'UI/Sheet',
+  title: 'Design Tokens/Sheet',
   component: Sheet,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
