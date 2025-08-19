@@ -1,0 +1,6 @@
+import{j as t}from"./iframe-D4P0QQci.js";import{T as r,a as e,b as p}from"./tooltip-BG7Tf0Jp.js";import"./preload-helper-D9Z9MdNV.js";import"./index-Dc_FVRD7.js";import"./index-Cx5E2LR1.js";import"./index-B2bjad_y.js";import"./index-_SdyT0R_.js";import"./index-CMKm3g-K.js";import"./index-Cu-jjTCe.js";import"./index-6l279soJ.js";import"./index-DTcaILCg.js";import"./index-Biy6zRLz.js";import"./index-Cnoq0yql.js";import"./index-aqDw0fNM.js";import"./index-DsAOtiQ6.js";import"./index-BN_JcXx0.js";import"./index-DcPLjmLX.js";import"./index-6SgvA6uv.js";import"./utils-CBfrqCZ4.js";const v={title:"Design Tokens/Tooltip",component:r,parameters:{layout:"centered"},tags:["autodocs"]},o={render:()=>t.jsxs(r,{children:[t.jsx(e,{className:"border rounded-md px-3 py-2",children:"Hover me"}),t.jsx(p,{children:"Tooltip text"})]})};o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`{
+  render: () => <Tooltip>
+      <TooltipTrigger className="border rounded-md px-3 py-2">Hover me</TooltipTrigger>
+      <TooltipContent>Tooltip text</TooltipContent>
+    </Tooltip>
+}`,...o.parameters?.docs?.source}}};const E=["Default"];export{o as Default,E as __namedExportsOrder,v as default};
