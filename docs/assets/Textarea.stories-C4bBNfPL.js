@@ -1,5 +1,0 @@
-import{j as o}from"./iframe-D4P0QQci.js";import{c as s}from"./utils-CBfrqCZ4.js";import"./preload-helper-D9Z9MdNV.js";function r({className:a,...t}){return o.jsx("textarea",{"data-slot":"textarea",className:s("border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",a),...t})}r.__docgenInfo={description:"",methods:[],displayName:"Textarea"};const c={title:"Design Tokens/Textarea",component:r,parameters:{layout:"centered"},tags:["autodocs"]},e={args:{placeholder:"Type here"}};e.parameters={...e.parameters,docs:{...e.parameters?.docs,source:{originalSource:`{
-  args: {
-    placeholder: 'Type here'
-  }
-}`,...e.parameters?.docs?.source}}};const l=["Default"];export{e as Default,l as __namedExportsOrder,c as default};

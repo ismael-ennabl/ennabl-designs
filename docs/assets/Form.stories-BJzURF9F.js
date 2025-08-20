@@ -1,0 +1,3 @@
+import{e as o}from"./iframe-LWRVmnFj.js";import"./label-DonAIvJ5.js";import"./preload-helper-D9Z9MdNV.js";import"./index-gdvdVdh-.js";import"./index-CABtAXQK.js";import"./index-DPcGnTxN.js";import"./utils-CBfrqCZ4.js";const t=o.createContext(null);t.displayName="HookFormContext";const n=r=>{const{children:a,...s}=r;return o.createElement(t.Provider,{value:s},a)};typeof window<"u"?o.useLayoutEffect:o.useEffect;const m=n,g={title:"Design Tokens/Form",component:m,parameters:{layout:"centered"},tags:["autodocs"]},e={args:{}};e.parameters={...e.parameters,docs:{...e.parameters?.docs,source:{originalSource:`{
+  args: {}
+}`,...e.parameters?.docs?.source}}};const x=["Default"];export{e as Default,x as __namedExportsOrder,g as default};

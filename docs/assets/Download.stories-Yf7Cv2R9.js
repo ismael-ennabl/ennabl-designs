@@ -1,0 +1,5 @@
+import{j as e}from"./iframe-LWRVmnFj.js";import"./preload-helper-D9Z9MdNV.js";const r=({format:t})=>e.jsxs("div",{className:"space-y-2",children:[e.jsx("div",{className:"text-sm text-muted-foreground",children:"Dropdown button to export data in different formats."}),e.jsxs("div",{className:"inline-flex items-center gap-2",children:[e.jsx("button",{className:"px-3 py-1 border rounded",children:"Download"}),e.jsxs("select",{className:"border rounded px-2 py-1",defaultValue:t,children:[e.jsx("option",{value:"XLS",children:"XLS"}),e.jsx("option",{value:"PDF",children:"PDF"}),e.jsx("option",{value:"JSON",children:"JSON"}),e.jsx("option",{value:"All",children:"All"})]})]})]}),n={title:"Features/Download",component:r,parameters:{layout:"centered"},tags:["autodocs"],argTypes:{format:{control:"radio",options:["XLS","PDF","JSON","All"]}}},o={args:{format:"XLS"}};o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`{
+  args: {
+    format: 'XLS'
+  }
+}`,...o.parameters?.docs?.source}}};const l=["Default"];export{o as Default,l as __namedExportsOrder,n as default};
