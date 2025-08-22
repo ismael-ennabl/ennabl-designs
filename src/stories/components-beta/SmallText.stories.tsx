@@ -6,7 +6,7 @@ const SmallTextEl = ({ children }: { children: React.ReactNode }) => (
 )
 
 const meta: Meta<typeof SmallTextEl> = {
-  title: 'Components (Beta)/Small Text',
+  title: 'Component Tokens (Beta)/Small Text',
   component: SmallTextEl,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

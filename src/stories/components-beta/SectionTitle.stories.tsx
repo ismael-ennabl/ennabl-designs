@@ -4,7 +4,7 @@ import React from 'react'
 const SectionTitleEl = ({ children }: { children: React.ReactNode }) => <h2>{children}</h2>
 
 const meta: Meta<typeof SectionTitleEl> = {
-  title: 'Components (Beta)/Section Title',
+  title: 'Component Tokens (Beta)/Section Title',
   component: SectionTitleEl,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
