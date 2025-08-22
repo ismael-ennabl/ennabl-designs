@@ -1,14 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
+import { Footer as FooterComp } from '@/components/ui/footer'
 
-const SmallTextEl = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-[0.625rem] font-normal">{children}</p>
-)
-const Footer = () => <footer><SmallTextEl>Composed of the Small Text.</SmallTextEl></footer>
-
-const meta: Meta<typeof Footer> = {
-  title: 'Components (Beta)/Footer',
-  component: Footer,
+const meta: Meta<typeof FooterComp> = {
+  title: 'Components (Product Pages)/Footer',
+  component: FooterComp,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
 }
@@ -16,9 +12,9 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => <Footer />,
+  render: () => <FooterComp note="Small footer note." />,
   parameters: {
-    docs: { description: { story: 'Composed of the Small Text.' } },
+    docs: { description: { story: 'Footer with small text note.' } },
   },
 }
 

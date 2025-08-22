@@ -1,12 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
+import { Header as HeaderComp } from '@/components/ui/header'
 
-const PageTitleEl = ({ children }: { children: React.ReactNode }) => <h1>{children}</h1>
-const Header = () => <header><PageTitleEl>Composed of the Page Title.</PageTitleEl></header>
-
-const meta: Meta<typeof Header> = {
-  title: 'Components (Beta)/Header',
-  component: Header,
+const meta: Meta<typeof HeaderComp> = {
+  title: 'Components (Product Pages)/Header',
+  component: HeaderComp,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
 }
@@ -14,9 +12,9 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => <Header />,
+  render: () => <HeaderComp title="Page Title" />,
   parameters: {
-    docs: { description: { story: 'Composed of the Page Title.' } },
+    docs: { description: { story: 'Header with a medium page title.' } },
   },
 }
 

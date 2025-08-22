@@ -4,7 +4,7 @@ import React from 'react'
 const PageTitleEl = ({ children = 'Page Title' }: { children?: React.ReactNode }) => <h1>{children}</h1>
 
 const meta: Meta<typeof PageTitleEl> = {
-  title: 'Component Tokens (Beta)/Page Title',
+  title: 'Components (Product Pages)/Page Title',
   component: PageTitleEl,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
