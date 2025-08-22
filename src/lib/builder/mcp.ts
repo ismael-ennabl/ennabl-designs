@@ -82,7 +82,7 @@ export function generatePageCode(
     if (!/^"use client";/.test(code)) {
       code = `"use client";\n${code}`;
     }
-    const prelude = `\n// Data loader for tables (mocked via ennabl-design-data)\nasync function useTableData() {\n  const res = await fetch('/api/builder/data/generate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ table: 'policies' }) });\n  const j = await res.json();\n  return Array.isArray(j.rows) ? j.rows : [];\n}\n`;
+    const prelude = `\n// Data loader for tables (mock or supabase)\nasync function useTableData() {\n  const preferSupabase = !!(process.env.NEXT_PUBLIC_SUPABASE_URL);\n  const path = preferSupabase ? '/api/builder/data/query' : '/api/builder/data/generate';\n  const res = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ table: 'policies', tenantId: 'design' }) });\n  const j = await res.json();\n  return Array.isArray(j.rows) ? j.rows : [];\n}\n`;
     code = code.replace(/export default function [^{]+\{/, (m) => `${prelude}${m}`);
     code = code.replace(/return \(\n\s*<div>/, `const [rows, setRows] = React.useState([] as any[]);\n  React.useEffect(() => { useTableData().then(setRows); }, []);\n  const cols = rows.length ? Object.keys(rows[0]) : [];\n  return (\n    <div>`);
     // Inject Section + table rendering block
