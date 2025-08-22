@@ -53,6 +53,14 @@ export function extractFromPrompt(
   return { intents: Array.from(new Set(intents)), includes: Array.from(new Set(includes)) };
 }
 
+function detectDataset(prompt: string): { table?: string; title?: string } {
+  const p = prompt.toLowerCase();
+  if (p.includes("incoming renewal")) {
+    return { table: "incoming_renewals", title: "Incoming Renewals" };
+  }
+  return {};
+}
+
 export function pickByNames(
   names: string[],
   registry: ComponentMeta[]
@@ -70,7 +78,8 @@ export function pickByNames(
 export function generatePageCode(
   pageName: string,
   components: ComponentMeta[],
-  importBase?: string
+  importBase?: string,
+  options?: { table?: string; sectionTitle?: string }
 ): string {
   // Prefer our own UI import mapping over Storybook story import hints
   const { mapped } = mapComponentsToUiImports(components);
@@ -82,11 +91,13 @@ export function generatePageCode(
     if (!/^"use client";/.test(code)) {
       code = `"use client";\n${code}`;
     }
-    const prelude = `\n// Data loader for tables (mock or supabase)\nasync function useTableData() {\n  const preferSupabase = !!(process.env.NEXT_PUBLIC_SUPABASE_URL);\n  const path = preferSupabase ? '/api/builder/data/query' : '/api/builder/data/generate';\n  const res = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ table: 'policies', tenantId: 'design' }) });\n  const j = await res.json();\n  return Array.isArray(j.rows) ? j.rows : [];\n}\n`;
+    const tableName = options?.table || "policies";
+    const sectionTitle = options?.sectionTitle || "Policies";
+    const prelude = `\n// Data loader for tables (mock or supabase)\nasync function useTableData() {\n  const preferSupabase = !!(process.env.NEXT_PUBLIC_SUPABASE_URL);\n  const path = preferSupabase ? '/api/builder/data/query' : '/api/builder/data/generate';\n  const res = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ table: '${tableName}', tenantId: 'design' }) });\n  const j = await res.json();\n  return Array.isArray(j.rows) ? j.rows : [];\n}\n`;
     code = code.replace(/export default function [^{]+\{/, (m) => `${prelude}${m}`);
     code = code.replace(/return \(\n\s*<div>/, `const [rows, setRows] = React.useState([] as any[]);\n  React.useEffect(() => { useTableData().then(setRows); }, []);\n  const cols = rows.length ? Object.keys(rows[0]) : [];\n  return (\n    <div>`);
     // Inject Section + table rendering block
-    code = code.replace(/<Table \/>/, `<Section title=\"Policies\">\n        <div className=\"overflow-x-auto\">\n          <Table>\n            <TableHeader>\n              <TableRow>\n                {cols.map((c) => (<TableHead key={c}>{c}</TableHead>))}\n              </TableRow>\n            </TableHeader>\n            <TableBody>\n              {rows.map((r, i) => (\n                <TableRow key={i}>\n                  {cols.map((c) => (<TableCell key={c}>{String(r[c])}</TableCell>))}\n                </TableRow>\n              ))}\n            </TableBody>\n          </Table>\n        </div>\n      </Section>`);
+    code = code.replace(/<Table \/>/, `<Section title=\"${sectionTitle}\">\n        <div className=\"overflow-x-auto\">\n          <Table>\n            <TableHeader>\n              <TableRow>\n                {cols.map((c) => (<TableHead key={c}>{c}</TableHead>))}\n              </TableRow>\n            </TableHeader>\n            <TableBody>\n              {rows.map((r, i) => (\n                <TableRow key={i}>\n                  {cols.map((c) => (<TableCell key={c}>{String(r[c])}</TableCell>))}\n                </TableRow>\n              ))}\n            </TableBody>\n          </Table>\n        </div>\n      </Section>`);
   }
   return code;
 }
@@ -115,7 +126,8 @@ export async function composeFromPrompt(
   if (!mapped.length) {
     return { code: "", used: [], unknownIntents: Array.from(new Set([...unknown, ...missing])) };
   }
-  const code = generatePageCode(pageName, mapped, importBase ?? "@/components/ui");
+  const ds = detectDataset(prompt);
+  const code = generatePageCode(pageName, mapped, importBase ?? "@/components/ui", { table: ds.table, sectionTitle: ds.title });
   const unknownOut = Array.from(new Set([...unknown, ...missing]));
   return { code, used: mapped.map(c => ({ id: c.id, title: c.title, exportName: c.exportName })), unknownIntents: unknownOut.length ? unknownOut : undefined };
 }
