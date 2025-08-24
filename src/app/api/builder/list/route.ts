@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { getRegistry } from "@/lib/builder/mcp";
 
-export const revalidate = 60;
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   const components = await getRegistry();

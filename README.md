@@ -34,3 +34,28 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Mock data reseed from Builder
+
+To reseed Supabase mock data from the Builder UI:
+
+1) Run the mock server in `ennabl-design-data`:
+
+```bash
+cd /Users/isma/Work/code/ennabl-design-data
+export SUPABASE_URL=...
+export SUPABASE_SERVICE_ROLE=...
+export RESEED_TOKEN=dev-token
+export MOCK_SERVER_PORT=8787
+npm run mock:server
+```
+
+2) Configure the Builder app env in `.env.local`:
+
+```bash
+MOCK_URL=http://localhost:8787
+MOCK_TOKEN=dev-token
+```
+
+3) In the Builder page (`/builder`), click “Reseed mock data”. This calls
+`POST /api/mock/reseed` which forwards to the local mock server.
