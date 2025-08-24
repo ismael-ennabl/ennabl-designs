@@ -404,6 +404,24 @@ export default function BuilderPage() {
                 <CardTitle>Live Preview</CardTitle>
               </CardHeader>
               <CardContent className="h-full">
+                <div className="flex items-center gap-2 mb-3">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={async () => {
+                      setStatus("Reseeding mock data...");
+                      try {
+                        const r = await fetch('/api/mock/reseed', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tenant: 'design' }) });
+                        const j = await r.json();
+                        if (!r.ok || !j?.ok) throw new Error(j?.error || 'Reseed failed');
+                        setStatus(`Reseeded tenant: ${j.tenant}`);
+                        setPreviewVersion(Date.now());
+                      } catch (e: any) {
+                        setStatus(e?.message || 'Reseed failed');
+                      }
+                    }}
+                  >Reseed mock data</Button>
+                </div>
                 {previewUrl ? (
                   <iframe className="w-full h-full rounded border" src={`${previewUrl}?v=${previewVersion}`} />
                 ) : (
