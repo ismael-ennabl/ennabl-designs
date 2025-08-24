@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { examples } from "@/playground/examples"
+import { examples } from "@/sandbox/examples"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 
 export default function PlaygroundIndexPage() {

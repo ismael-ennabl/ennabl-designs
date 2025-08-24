@@ -1,4 +1,4 @@
-import Page from "@/playground/generated/sgasg";
+import Page from "@/sandbox/generated/sgasg";
 export default function GeneratedRoute() {
   return <Page />;
 }

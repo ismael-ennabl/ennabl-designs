@@ -16,8 +16,8 @@ export async function POST(req: Request) {
     const m = line.match(/^import\s+.*?from\s+"([^"]+)";$/);
     if (!m) continue;
     const from = m[1];
-    if (!(from.startsWith("@/components/ui") || from.startsWith("@/components/") || from.startsWith("@/playground/") || from.startsWith("@/filters/") || from.startsWith("@/features/") )) {
-      warnings.push(`Non-design import detected: ${from}`);
+    if (!(from.startsWith("@/components/ui") || from.startsWith("@/components/") || from.startsWith("@/sandbox/") || from.startsWith("@/filters/") || from.startsWith("@/features/") )) {
+      return NextResponse.json({ ok: false, error: "invalid-import", from }, { status: 400 });
     }
   }
 

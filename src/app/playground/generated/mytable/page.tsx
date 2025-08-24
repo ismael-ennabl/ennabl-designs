@@ -1,4 +1,4 @@
-import Page from "@/playground/generated/mytable";
+import Page from "@/sandbox/generated/mytable";
 export default function GeneratedRoute() {
   return <Page />;
 }

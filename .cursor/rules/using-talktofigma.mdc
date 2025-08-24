@@ -1,8 +1,0 @@
----
-alwaysApply: true
----
-Using the MCP TalkToFigma, Whether starting from Figma or starting from Cursor, always review all design details before finishing. you can use context7 MCP and designsystem MCP if available. 
-Use the TalkToFigma plugin to read and apply every design token — including nested tokens — from the Figma file or Storybook project.
-Check that all tokens are correctly mapped in the implementation, with no missing values. Especially doble check tables to render properly.
-Always apply styles from my global theme CSS first, instead of default styles, so the final result matches my intended brand look.
-Before finalizing, compare the implementation with both the Figma design and the Storybook story to confirm they match exactly in structure, style, and behavior.

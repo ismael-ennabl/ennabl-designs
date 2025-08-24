@@ -34,7 +34,7 @@ export async function POST(req: Request) {
       const routeDir = path.join(root, "src", "app", "playground", "generated", pageName.toLowerCase());
       const routeFile = path.join(routeDir, "page.tsx");
       fs.mkdirSync(routeDir, { recursive: true });
-      const routeCode = `import Page from "@/playground/generated/${pageName}";\nexport default function GeneratedRoute() {\n  return <Page />;\n}\n`;
+      const routeCode = `import Page from "@/sandbox/generated/${pageName}";\nexport default function GeneratedRoute() {\n  return <Page />;\n}\n`;
       fs.writeFileSync(routeFile, routeCode, "utf-8");
 
       return NextResponse.json({ ok: true, path: `src/app/playground/generated/${pageName.toLowerCase()}/page.tsx`, componentPath: `src/playground/generated/${pageName}.tsx`, used, unknownIntents });

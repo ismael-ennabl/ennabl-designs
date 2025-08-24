@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { getExampleBySlug } from "@/playground/examples"
+import { getExampleBySlug } from "@/sandbox/examples"
 
 export default async function PlaygroundExamplePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
