@@ -84,6 +84,13 @@ export function generatePageCode(
   // Prefer our own UI import mapping over Storybook story import hints
   const { mapped } = mapComponentsToUiImports(components);
   let code = generateReactPage(pageName, mapped, importBase);
+  // Remove top-level <h1>{pageName}</h1> headings that the generator may add
+  const esc = pageName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const titleRx = new RegExp(`\\n[\\t ]*<h1>[\\t ]*${esc}[\\t ]*<\\/h1>[\\t ]*\\n`, "m");
+  code = code.replace(titleRx, "\n");
+  code = code.replace(new RegExp(`<h1>[\\t ]*${esc}[\\t ]*<\\/h1>`, "m"), "");
+  // Collapse excessive blank lines
+  code = code.replace(/\n{3,}/g, "\n\n");
   // If a Table is part of the components, inject a basic data fetcher example
   const hasTable = mapped.some(c => (c.exportName || "").toLowerCase().includes("table"));
   if (hasTable) {
@@ -96,29 +103,42 @@ export function generatePageCode(
     const prelude = `\n// Data loader for tables (mock or supabase)\nasync function useTableData() {\n  const preferSupabase = !!(process.env.NEXT_PUBLIC_SUPABASE_URL);\n  const path = preferSupabase ? '/api/builder/data/query' : '/api/builder/data/generate';\n  const res = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ table: '${tableName}', tenantId: 'design' }) });\n  const j = await res.json();\n  return Array.isArray(j.rows) ? j.rows : [];\n}\n`;
     code = code.replace(/export default function [^{]+\{/, (m) => `${prelude}${m}`);
     code = code.replace(/return \(\n\s*<div>/, `const [rows, setRows] = React.useState([] as any[]);\n  React.useEffect(() => { useTableData().then(setRows); }, []);\n  const cols = rows.length ? Object.keys(rows[0]) : [];\n  return (\n    <div>`);
-    // Inject Section + table rendering block
-    code = code.replace(/<Table \/>/, `<Section title=\"${sectionTitle}\">\n        <div className=\"overflow-x-auto\">\n          <Table>\n            <TableHeader>\n              <TableRow>\n                {cols.map((c) => (<TableHead key={c}>{c}</TableHead>))}\n              </TableRow>\n            </TableHeader>\n            <TableBody>\n              {rows.map((r, i) => (\n                <TableRow key={i}>\n                  {cols.map((c) => (<TableCell key={c}>{String(r[c])}</TableCell>))}\n                </TableRow>\n              ))}\n            </TableBody>\n          </Table>\n        </div>\n      </Section>`);
+    // Ensure Table subcomponents are imported
+    code = code.replace(/\{\s*Table\s*\}/, '{ Table, TableHeader, TableRow, TableHead, TableBody, TableCell }');
+    // Ensure Card imports are present right after React import
+    const base = importBase ?? "@/components/ui";
+    if (!new RegExp(`from\\s+["']${base}/card["']`).test(code)) {
+      code = code.replace(/import\s+React\s+from\s+["']react["'];?/, (m) => `${m}\nimport { Card, CardHeader, CardTitle, CardContent } from "${base}/card";`);
+    }
+    // Inject Card wrapper with table
+    code = code.replace(/<Table \/>/, `<Card>\n        <CardHeader><CardTitle>${sectionTitle}</CardTitle></CardHeader>\n        <CardContent>\n          <div className=\"overflow-x-auto\">\n            <Table>\n              <TableHeader>\n                <TableRow>\n                  {cols.map((c) => (<TableHead key={c}>{c}</TableHead>))}\n                </TableRow>\n              </TableHeader>\n              <TableBody>\n                {rows.map((r, i) => (\n                  <TableRow key={i}>\n                    {cols.map((c) => (<TableCell key={c}>{String(r[c])}</TableCell>))}\n                  </TableRow>\n                ))}\n              </TableBody>\n            </Table>\n          </div>\n        </CardContent>\n      </Card>`);
   }
   return code;
 }
 
 export type GeneratedResult = {
   code: string;
-  used: { id: string; title: string; exportName?: string }[];
+  used: { id: string; title: string; exportName?: string; importPath?: string; storybookUrl?: string }[];
   unknownIntents?: string[];
 };
 
 export async function composeFromPrompt(
   pageName: string,
   prompt: string,
-  importBase?: string
+  importBase?: string,
+  options?: { seedIncludes?: string[]; removeNames?: string[] }
 ): Promise<GeneratedResult> {
   const registry = await getRegistry();
   const { intents, includes } = extractFromPrompt(prompt, registry);
   const resolved: string[] = [];
   intents.forEach(t => { const r = resolveCanonical(t); if (r) resolved.push(r); });
   const unknown = intents.filter(t => !resolved.includes(t));
-  const chosen = pickByNames([...resolved, ...includes], registry);
+  const additive = Array.from(new Set([...(options?.seedIncludes || []), ...includes]));
+  let chosen = pickByNames([...resolved, ...additive], registry);
+  if (options?.removeNames?.length) {
+    const toRemove = new Set(options.removeNames.map(s => s.toLowerCase()));
+    chosen = chosen.filter(c => !toRemove.has((c.exportName || leaf(c.title)).toLowerCase()));
+  }
   if (!chosen.length) {
     return { code: "", used: [], unknownIntents: unknown };
   }
@@ -129,7 +149,13 @@ export async function composeFromPrompt(
   const ds = detectDataset(prompt);
   const code = generatePageCode(pageName, mapped, importBase ?? "@/components/ui", { table: ds.table, sectionTitle: ds.title });
   const unknownOut = Array.from(new Set([...unknown, ...missing]));
-  return { code, used: mapped.map(c => ({ id: c.id, title: c.title, exportName: c.exportName })), unknownIntents: unknownOut.length ? unknownOut : undefined };
+  const baseUrl = process.env.ENNABLUI_STORYBOOK_URL || "https://ismael-ennabl.github.io/ennabl-designs";
+  const used = mapped.map(c => {
+    const storyId = c.stories && c.stories.length ? c.stories[0].id : undefined;
+    const storybookUrl = storyId ? `${baseUrl}/?path=/story/${storyId}` : undefined;
+    return { id: c.id, title: c.title, exportName: c.exportName, importPath: c.importHint, storybookUrl };
+  });
+  return { code, used, unknownIntents: unknownOut.length ? unknownOut : undefined };
 }
 
 // Build mapping from export name (PascalCase) to '@/components/ui/<fileBase>'

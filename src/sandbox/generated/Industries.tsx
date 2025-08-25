@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
-import { Table } from "@/components/ui/table";
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 
 // Data loader for tables (mock or supabase)
@@ -18,24 +19,27 @@ export default function Industries() {
   return (
     <div>
       <h1>Industries</h1>
-      <Section title="Policies">
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                {cols.map((c) => (<TableHead key={c}>{c}</TableHead>))}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {rows.map((r, i) => (
-                <TableRow key={i}>
-                  {cols.map((c) => (<TableCell key={c}>{String(r[c])}</TableCell>))}
+      <Card>
+        <CardHeader><CardTitle>Policies</CardTitle></CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  {cols.map((c) => (<TableHead key={c}>{c}</TableHead>))}
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </Section>
+              </TableHeader>
+              <TableBody>
+                {rows.map((r, i) => (
+                  <TableRow key={i}>
+                    {cols.map((c) => (<TableCell key={c}>{String(r[c])}</TableCell>))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

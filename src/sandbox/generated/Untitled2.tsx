@@ -1,7 +1,9 @@
 "use client";
 import React from "react";
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Header } from "@/components/ui/header";
+import { Footer } from "@/components/ui/footer";
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 
 
 // Data loader for tables (mock or supabase)
@@ -12,13 +14,14 @@ async function useTableData() {
   const j = await res.json();
   return Array.isArray(j.rows) ? j.rows : [];
 }
-export default function testingtable2() {
+export default function Untitled2() {
   const [rows, setRows] = React.useState([] as any[]);
   React.useEffect(() => { useTableData().then(setRows); }, []);
   const cols = rows.length ? Object.keys(rows[0]) : [];
   return (
     <div>
-      <h1>testingtable2</h1>
+      <Header />
+      <Footer />
       <Card>
         <CardHeader><CardTitle>Policies</CardTitle></CardHeader>
         <CardContent>

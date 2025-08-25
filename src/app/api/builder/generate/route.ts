@@ -7,6 +7,8 @@ type Body = {
   prompt: string;
   pageName?: string;
   target?: "playground" | "app";
+  seedIncludes?: string[];
+  removeNames?: string[];
 };
 
 export async function POST(req: Request) {
@@ -16,7 +18,7 @@ export async function POST(req: Request) {
     const target = body.target || "playground";
     if (!body.prompt) return NextResponse.json({ ok: false, error: "missing-prompt" }, { status: 400 });
 
-    const { code, used, unknownIntents } = await composeFromPrompt(pageName, body.prompt, "@/components/ui");
+    const { code, used, unknownIntents } = await composeFromPrompt(pageName, body.prompt, "@/components/ui", { seedIncludes: body.seedIncludes || [], removeNames: body.removeNames || [] });
     if (!code) {
       return NextResponse.json({ ok: false, error: "no-matching-components", unknownIntents }, { status: 400 });
     }
@@ -24,8 +26,8 @@ export async function POST(req: Request) {
     // Decide write path: /src/playground/generated/<pageName>.tsx or /src/app/<pageName>/page.tsx
     const root = process.cwd();
     if (target === "playground") {
-      // Write component source
-      const compDir = path.join(root, "src", "playground", "generated");
+      // Write component source (sandbox for generated components)
+      const compDir = path.join(root, "src", "sandbox", "generated");
       const compFile = path.join(compDir, `${pageName}.tsx`);
       fs.mkdirSync(compDir, { recursive: true });
       fs.writeFileSync(compFile, code, "utf-8");

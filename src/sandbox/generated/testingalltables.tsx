@@ -12,13 +12,13 @@ async function useTableData() {
   const j = await res.json();
   return Array.isArray(j.rows) ? j.rows : [];
 }
-export default function testingtable2() {
+export default function testingalltables() {
   const [rows, setRows] = React.useState([] as any[]);
   React.useEffect(() => { useTableData().then(setRows); }, []);
   const cols = rows.length ? Object.keys(rows[0]) : [];
   return (
     <div>
-      <h1>testingtable2</h1>
+      <h1>testingalltables</h1>
       <Card>
         <CardHeader><CardTitle>Policies</CardTitle></CardHeader>
         <CardContent>
